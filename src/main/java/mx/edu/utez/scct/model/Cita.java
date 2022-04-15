@@ -1,5 +1,7 @@
 package mx.edu.utez.scct.model;
 
+
+import java.sql.Time;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,6 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.JoinColumn;
 
@@ -26,29 +31,33 @@ public class Cita {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCita;
 
-	@Column(name = "fecha_registro", nullable = false)
-	@CreationTimestamp
+	@Column(name = "fecha", nullable = false)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fecha;
 	
 	@Column(nullable = false, length = 45)
-	private String hora;
+	@DateTimeFormat(pattern = "dd hh:mm:ss a")
+	private Time hora;
 	
 	@Column(nullable = false, length = 45)
-	private String horaFinal;
+	@DateTimeFormat(pattern = "dd hh:mm:ss a")
+	private Time horaFinal;
+	@Column(nullable = false)
+	private int nVentanilla;
 	
 	@Column(nullable = false)
 	private boolean estado;
 	
-	@Column(nullable = false)
-	private int nVentanilla;
-
+	
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-			name = "citas_documentos",
+			name = "Documento_cita",
 			joinColumns = @JoinColumn(name="idCita"), 
 			inverseJoinColumns = @JoinColumn(name="idDocumento"))
+
 	private Set<Documento> documento;
+	
 	
 	
 	public Cita() {
@@ -78,22 +87,24 @@ public class Cita {
 	}
 
 
-	public String getHora() {
+	
+
+	public Time getHora() {
 		return hora;
 	}
 
 
-	public void setHora(String hora) {
+	public void setHora(Time hora) {
 		this.hora = hora;
 	}
 
 
-	public String getHoraFinal() {
+	public Time getHoraFinal() {
 		return horaFinal;
 	}
 
 
-	public void setHoraFinal(String horaFinal) {
+	public void setHoraFinal(Time horaFinal) {
 		this.horaFinal = horaFinal;
 	}
 
@@ -131,8 +142,15 @@ public class Cita {
 	@Override
 	public String toString() {
 		return "Cita [idCita=" + idCita + ", fecha=" + fecha + ", hora=" + hora + ", horaFinal=" + horaFinal
-				+ ", estado=" + estado + ", nVentanilla=" + nVentanilla + ", documento=" + documento + "]";
+				+ ", estado=" + estado + ", nVentanilla=" + nVentanilla + ", documento=" + documento + ", getIdCita()="
+				+ getIdCita() + ", getFecha()=" + getFecha() + ", getHora()=" + getHora() + ", getHoraFinal()="
+				+ getHoraFinal() + ", isEstado()=" + isEstado() + ", getnVentanilla()=" + getnVentanilla()
+				+ ", getDocumento()=" + getDocumento() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
+	
 
 
 	

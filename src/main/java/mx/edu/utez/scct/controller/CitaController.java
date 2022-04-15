@@ -1,5 +1,8 @@
 package mx.edu.utez.scct.controller;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +29,10 @@ public class CitaController {
 	@GetMapping(value="/crear")
 	public String crearCita(Cita cita, Model modelo) {
 		modelo.addAttribute("listaCitas", citaService.listar());
+		System.out.print(cita.getFecha());
 		return "citas/formCita";
 	}
-	
-	
-	
+
 	@GetMapping(value = { "/listar"})
 	public String listarCitas( Model model ,RedirectAttributes redirectAttributes) {
 	   List<Cita> listaCitas = citaService.listar();
@@ -57,7 +59,7 @@ public class CitaController {
 		if(cita != null) {
 			modelo.addAttribute("cita", cita);
 
-			return "citas/formCita";
+			return "citas/editarCita";
 			
 		}
 		
@@ -67,13 +69,15 @@ public class CitaController {
 	
 	@PostMapping("/guardar")
 	public String guardarCita(@ModelAttribute("cita") Cita cita, Model modelo, RedirectAttributes redirectAttributes){
-
+		System.out.println(cita.getFecha());
 		if (cita.getIdCita() == null) { // Create
 			
 		} else { // Update
 			
 			cita.setFecha(cita.getFecha());
 			cita.setHora(cita.getHora());
+			cita.setHoraFinal(cita.getHoraFinal());
+			cita.setnVentanilla(cita.getnVentanilla());
 			cita.setEstado(cita.isEstado());
 			
 		}

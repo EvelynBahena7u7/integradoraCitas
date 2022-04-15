@@ -29,7 +29,9 @@
 								<tr>
 									<th scope="col">#</th>
 									<th scope="col">Fecha</th>
-									<th scope="col">Hora</th>
+									<th scope="col">Hora Inicial</th>
+									<th scope="col">Hora Final</th>
+									<th scope="col">No. Ventanilla</th>
 									<th scope="col">Estado</th>
 									
 								
@@ -40,15 +42,11 @@
 								<tr th:each="tmpCita: ${listaCitas}">
 									<th scope="row">1</th>
 				
-									
-									<td>[[${tmpCita.fecha}]]</td>
-									<td>[[${tmpCita.hora}]]</td>
-								
-									<td>
-										<div th:switch="${tmpCita.estado}">
-											
-										</div>
-									</td>
+									<td>[[${#dates.format(tmpCita.fecha, 'dd-MM-yyyy')}]]</td>
+									<td th:text="${tmpCita.hora}"></td >
+									<td th:text="${tmpCita.horaFinal}"></td >
+									<td th:text="${tmpCita.nVentanilla}"></td >
+									<td th:text="${tmpCita.estado}?'Atendida':'Pendiente'"></td >
 									<td>
 										<a th:href="@{/citas/mostrar/{id} (id=${tmpCita.idCita})}" class="btn btn-info">
 											<ion-icon name="eye"></ion-icon>

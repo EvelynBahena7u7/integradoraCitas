@@ -39,15 +39,15 @@
 									
 								
 								<label>Hora</label>
-									<input class="form-control form-control-lg" type="text" th:field="*{hora}"
+									<input class="form-control form-control-lg" type="time" th:field="*{hora}"
 										placeholder="" required="required">
 								
 								<label>Hora Final</label>
-									<input class="form-control form-control-lg" type="text" th:field="*{horaFinal}"
+									<input class="form-control form-control-lg" type="time" th:field="*{horaFinal}"
 										placeholder="" required="required">
 								
 								<label>No. Ventanilla</label>
-									<input class="form-control form-control-lg" type="text" th:field="*{horaFinal}"
+									<input class="form-control form-control-lg" type="text" th:field="*{nVentanilla}"
 										placeholder="" required="required">
 								
 									<label>Estatus</label>
@@ -58,7 +58,7 @@
 									</div>
 									<div>
 									<label>Documento</label>
-									<input id="campoFile" accept=".pdf" name="archivo" type="file" value="" required="required" />
+									<input id="campoFile" accept=".pdf" name="archivo" type="file" value="" required="required"/>
 									<div>
 									<p>Sólo se aceptan archivos mayores a 3M</p>
 								</div>
